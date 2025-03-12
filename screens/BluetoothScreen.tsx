@@ -59,9 +59,13 @@ const BluetoothScreen = () => {
       setDevices((prevDevices) => {
         // Check if the device is already in the list
         if (device && !prevDevices.some((d) => d.id === device.id)) {
+            const deviceName =
+            device.name ||
+            device.localName ||
+            (device.manufacturerData ? `Device (${device.manufacturerData})` : 'Unnamed Device');
           const newDevice: ScannedDevice = {
             id: device.id,
-            name: device.name,
+            name: deviceName,
           };
           return [...prevDevices, newDevice]; // Add the new device
         }
